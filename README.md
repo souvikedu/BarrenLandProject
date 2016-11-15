@@ -1,0 +1,2 @@
+1. CalculationMain - This class contains a main method. Run CalculationMain and put input in STDIN in the format {“0 292 399 307”}
+2. BarrenLandCalculationTest - This is an unit test class for BarrenLandCalculation. Right click on the file and run the unit tests.
