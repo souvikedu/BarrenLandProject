@@ -1,7 +1,6 @@
 package target;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 import java.util.*;
@@ -37,16 +36,22 @@ public class BarrenLandCalculation {
      * This method reads input from STDIN
      */
     public void setBarrenLandInputUsingStdin() throws Exception {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        setBarrenLandInput(reader.readLine());
-        reader.close();
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(System.in));
+            parseInput(reader.readLine());
+        } finally {
+            if(reader != null) {
+                reader.close();
+            }
+        }
     }
 
     /**
-     * This method parses the input string Sample input:{“48 192 351 207”, “48
-     * 392 351 407”, “120 52 135 547”, “260 52 275 547”}
+     * This method parses the input string and assigns marks barren lands
+     * Sample input:{“48 192 351 207”, “48 392 351 407”, “120 52 135 547”, “260 52 275 547”}
      */
-    private void setBarrenLandInput(String input) throws Exception{
+    private void parseInput(String input) throws Exception{
         try {
             input = input.replaceAll("\\{|\\}", "");
             input = input.replaceAll("“|”", "");
