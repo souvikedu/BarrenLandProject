@@ -9,7 +9,7 @@ public class CalculationMain {
 
     public static void main(String[] args) throws Exception {
         BarrenLandCalculation barrenLandCalculator = new BarrenLandCalculation();
-        barrenLandCalculator.setBarrenLandInputUsingStdin();
+        barrenLandCalculator.barrenLandInputUsingStdin();
         barrenLandCalculator.printOutput();
     }
 }
