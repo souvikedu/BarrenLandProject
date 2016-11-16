@@ -46,13 +46,17 @@ public class BarrenLandCalculationTest extends TestCase {
     /**
      * Testing barren land calculation where full area is barren land
      */
-    public void testFullBarrenLand() throws IOException {
-        setUpInput("{“0 0 399 599”}");
-        BarrenLandCalculation barrenLandCalculation = new BarrenLandCalculation();
-        barrenLandCalculation.barrenLandInputUsingStdin();
-        barrenLandCalculation.printOutput();
+    public void testFullBarrenLand() {
+        try {
+            setUpInput("{“0 0 399 599”}");
 
-        assertEquals("", mOutputStream.toString());
+            BarrenLandCalculation barrenLandCalculation = new BarrenLandCalculation();
+            barrenLandCalculation.barrenLandInputUsingStdin();
+            barrenLandCalculation.printOutput();
+            assertEquals("", mOutputStream.toString());
+        } catch (IOException e) {
+            fail(e.getMessage());
+        }
     }
 
     /**
@@ -61,14 +65,17 @@ public class BarrenLandCalculationTest extends TestCase {
      * input  : "{“0 292 399 307”}"
      * output : 116800 116800
      */
-    public void testBarrenLandTestCase1() throws IOException {
-        setUpInput("{“0 292 399 307”}");
+    public void testBarrenLandTestCase1() {
+        try {
+            setUpInput("{“0 292 399 307”}");
 
-        BarrenLandCalculation barrenLandCalculation = new BarrenLandCalculation();
-        barrenLandCalculation.barrenLandInputUsingStdin();
-        barrenLandCalculation.printOutput();
-
-        assertEquals("116800 116800", mOutputStream.toString());
+            BarrenLandCalculation barrenLandCalculation = new BarrenLandCalculation();
+            barrenLandCalculation.barrenLandInputUsingStdin();
+            barrenLandCalculation.printOutput();
+            assertEquals("116800 116800", mOutputStream.toString());
+        } catch (IOException e) {
+            fail(e.getMessage());
+        }
     }
 
     /**
@@ -77,62 +84,82 @@ public class BarrenLandCalculationTest extends TestCase {
      * input  : "{“48 192 351 207”,“48 392 351 407”,“120 52 135 547”,“260 52 275 547”}"
      * output : 22816 192608
      */
-    public void testBarrenLandTestCase2() throws IOException {
-        setUpInput("{“48 192 351 207”,“48 392 351 407”,“120 52 135 547”,“260 52 275 547”}");
+    public void testBarrenLandTestCase2() {
+        try {
+            setUpInput("{“48 192 351 207”,“48 392 351 407”,“120 52 135 547”,“260 52 275 547”}");
 
-        BarrenLandCalculation barrenLandCalculation = new BarrenLandCalculation();
-        barrenLandCalculation.barrenLandInputUsingStdin();
-        barrenLandCalculation.printOutput();
+            BarrenLandCalculation barrenLandCalculation = new BarrenLandCalculation();
+            barrenLandCalculation.barrenLandInputUsingStdin();
+            barrenLandCalculation.printOutput();
 
-        assertEquals("22816 192608", mOutputStream.toString());
+            assertEquals("22816 192608", mOutputStream.toString());
+        } catch (IOException e) {
+            fail(e.getMessage());
+        }
     }
 
     /**
      * Testing barren land calculation where full area is fertile land. Expected output 600 x 400
      */
-    public void testFullFertileLand() throws IOException {
-        setUpInput("{“”}");
+    public void testFullFertileLand() {
+        try {
+            setUpInput("{“”}");
 
-        BarrenLandCalculation barrenLandCalculation = new BarrenLandCalculation();
-        barrenLandCalculation.barrenLandInputUsingStdin();
-        barrenLandCalculation.printOutput();
+            BarrenLandCalculation barrenLandCalculation = new BarrenLandCalculation();
+            barrenLandCalculation.barrenLandInputUsingStdin();
+            barrenLandCalculation.printOutput();
 
-        assertEquals("240000", mOutputStream.toString());
+            assertEquals("240000", mOutputStream.toString());
+        } catch (IOException e) {
+            fail(e.getMessage());
+        }
     }
 
     /**
      * Testing barren land calculation invalid input
      * Empty input
      */
-    public void testInvalidInput1() throws IOException {
-        BarrenLandCalculation barrenLandCalculation = new BarrenLandCalculation();
-        setUpInput("");
-        barrenLandCalculation.barrenLandInputUsingStdin();
-        barrenLandCalculation.printOutput();
-        assertEquals("Invalid input", mOutputStream.toString());
+    public void testInvalidInput1() {
+        try {
+            BarrenLandCalculation barrenLandCalculation = new BarrenLandCalculation();
+            setUpInput("");
+            barrenLandCalculation.barrenLandInputUsingStdin();
+            barrenLandCalculation.printOutput();
+            assertEquals("Invalid input", mOutputStream.toString());
+        } catch (IOException e) {
+            fail(e.getMessage());
+        }
     }
 
     /**
      * Testing barren land calculation invalid input
      * Out of range coordinate for input >=400 for Y coordinate or >=600 for X coordinate
      */
-    public void testInvalidInput2() throws IOException {
-        BarrenLandCalculation barrenLandCalculation = new BarrenLandCalculation();
-        setUpInput("{“0 292 399 800”}");
-        barrenLandCalculation.barrenLandInputUsingStdin();
-        barrenLandCalculation.printOutput();
-        assertEquals("Invalid input", mOutputStream.toString());
+    public void testInvalidInput2() {
+        try {
+            BarrenLandCalculation barrenLandCalculation = new BarrenLandCalculation();
+            setUpInput("{“0 292 399 800”}");
+            barrenLandCalculation.barrenLandInputUsingStdin();
+            barrenLandCalculation.printOutput();
+            assertEquals("Invalid input", mOutputStream.toString());
+        } catch (IOException e) {
+            fail(e.getMessage());
+        }
     }
 
     /**
      * Testing barren land calculation invalid input
      * Negative value
      */
-    public void testInvalidInput3() throws IOException {
-        BarrenLandCalculation barrenLandCalculation = new BarrenLandCalculation();
-        setUpInput("{“0 292 -3 200”}");
-        barrenLandCalculation.barrenLandInputUsingStdin();
-        barrenLandCalculation.printOutput();
-        assertEquals("Invalid input", mOutputStream.toString());
+    public void testInvalidInput3() {
+        try {
+            BarrenLandCalculation barrenLandCalculation = new BarrenLandCalculation();
+            setUpInput("{“0 292 -3 200”}");
+            barrenLandCalculation.barrenLandInputUsingStdin();
+            barrenLandCalculation.printOutput();
+            assertEquals("Invalid input", mOutputStream.toString());
+        } catch (IOException e) {
+            fail(e.getMessage());
+        }
     }
 }
