@@ -15,7 +15,6 @@ public class BarrenLandCalculation {
     private static final int HEIGHT = 400;
 
     private int[][] mLand;
-    private List<Land> mBarrenLandList;
     private Queue<Point> mFertileAreaQueue;
     private List<Integer> mFertileAreaList;
 
@@ -23,7 +22,6 @@ public class BarrenLandCalculation {
         //mLand array contains all 0s as default
         mLand = new int[HEIGHT][WIDTH];
 
-        mBarrenLandList = new ArrayList<Land>();
         mFertileAreaQueue = new LinkedList<Point>();
         mFertileAreaList = new ArrayList<Integer>();
     }
