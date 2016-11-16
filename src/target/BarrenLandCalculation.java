@@ -20,15 +20,10 @@ public class BarrenLandCalculation {
     private List<Integer> mFertileAreaList;
 
     public BarrenLandCalculation() {
+        //mLand array contains all 0s as default
         mLand = new int[HEIGHT][WIDTH];
-        mBarrenLandList = new ArrayList<Land>();
 
-        // populating the whole land with value 0
-        for (int y = 0; y < HEIGHT; y++) {
-            for (int x = 0; x < WIDTH; x++) {
-                mLand[y][x] = 0;
-            }
-        }
+        mBarrenLandList = new ArrayList<Land>();
         mFertileAreaQueue = new LinkedList<Point>();
         mFertileAreaList = new ArrayList<Integer>();
     }
@@ -36,18 +31,28 @@ public class BarrenLandCalculation {
     /**
      * This method reads input from STDIN
      */
-    public void setBarrenLandInputUsingStdin() throws Exception {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        setBarrenLandInput(reader.readLine());
-        reader.close();
+    public void barrenLandInputUsingStdin() throws IOException {
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(System.in));
+            assignBarrenLand(reader.readLine());
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
     }
 
     /**
-     * This method parses the input string Sample input:{“48 192 351 207”, “48
-     * 392 351 407”, “120 52 135 547”, “260 52 275 547”}
+     * This method parses the input string and marks all barren lands
+     * Sample input:{“48 192 351 207”, “48 392 351 407”, “120 52 135 547”, “260 52 275 547”}
      */
-    private void setBarrenLandInput(String input) throws Exception{
+    private void assignBarrenLand(String input) {
         try {
+            //empty input is invalid input
+            if(input.equals("")) {
+                throw new Exception();
+            }
             input = input.replaceAll("\\{|\\}", "");
             input = input.replaceAll("“|”", "");
             input = input.replaceAll("\"", "");
@@ -55,28 +60,35 @@ public class BarrenLandCalculation {
             for (String land : barrenLands) {
                 String[] points = land.split(" ");
                 if(points.length == 4) {
-                    mBarrenLandList.add((new Land(Integer.parseInt(points[0]), Integer
-                            .parseInt(points[1]), Integer.parseInt(points[2]), Integer
-                            .parseInt(points[3]))));
+                    int by, bx, ty, tx;
+                    by = Integer.parseInt(points[0]);
+                    bx = Integer.parseInt(points[1]);
+                    ty = Integer.parseInt(points[2]);
+                    tx = Integer.parseInt(points[3]);
+                    if((by >= 0 && by < 400) &&
+                            (bx >= 0 && bx < 600) &&
+                            (ty >= 0 && ty < 400) &&
+                            (tx >= 0 && tx < 600)) {
+
+                        markBarrenLands(by, bx, ty, tx);
+                    } else {
+                        throw new Exception();
+                    }
                 }
             }
-
-            markBarrenLands();
             fertileLandCalculation();
         } catch (Exception e){
-            throw new Exception("Invalid input");
+            System.out.print("Invalid input");
         }
     }
 
     /**
-     * This method marks all barren lands with integer value 1
+     * This method marks barren lands with integer value 1
      */
-    private void markBarrenLands() {
-        for (Land land : mBarrenLandList) {
-            for (int y = land.getBottomLeftY(); y <= land.getTopRightY(); y++) {
-                for (int x = land.getBottomLeftX(); x <= land.getTopRightX(); x++) {
-                    mLand[y][x] = 1;
-                }
+    private void markBarrenLands(int bottomLeftY, int bottomLeftX, int topRightY, int topRightX) {
+        for (int y = bottomLeftY; y <= topRightY; y++) {
+            for (int x = bottomLeftX; x <= topRightX; x++) {
+                mLand[y][x] = 1;
             }
         }
     }
